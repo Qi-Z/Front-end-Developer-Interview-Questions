@@ -174,9 +174,28 @@ As Dean mentioned in the comments below, CSS sprites aren't really buying you ve
 ```
   * What are the exceptions?
 * Name 3 ways to decrease page load (perceived or actual load time).
+  * Prune CSS (Remove unused CSS)
+  * minify JS
+  * Optimize images (never scale down. If we have 700 x 700 png, don't scale down, make a 100 x 100 png instead)
+  * Reduce HTTP requests
 * If you jumped on a project and they used tabs and you used spaces, what would you do?
+
+Follow the rules.
+
 * Describe how you would create a simple slideshow page.
+
+Load all images in DOM if not many
+
+set CSS hidden
+
+Set prev and next buttons
+
+Add JS
+
 * If you could master one technology this year, what would it be?
+
+ReactJS
+
 * Explain the importance of standards and standards bodies.
 * What is Flash of Unstyled Content? How do you avoid FOUC?
 * Explain what ARIA and screenreaders are, and how to make a website accessible.
