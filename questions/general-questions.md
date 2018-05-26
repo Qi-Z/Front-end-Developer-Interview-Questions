@@ -131,6 +131,8 @@ name the assets
 
 https://stackoverflow.com/questions/7456325/get-number-of-concurrent-requests-by-browser
 
+https://blog.octo.com/en/http2-arrives-but-sprite-sets-aint-no-dead/
+
 ```
 There are a lot of things to consider here. In most situations, I would only choose one cookieless domain/subdomain to host your images such as static.mywebsite.com. And ideally static files should be hosted by a CDN, but that's another story.
 
