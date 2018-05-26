@@ -128,6 +128,48 @@ Caching
 name the assets
 
 * How many resources will a browser download from a given domain at a time?
+
+https://stackoverflow.com/questions/7456325/get-number-of-concurrent-requests-by-browser
+
+```
+There are a lot of things to consider here. In most situations, I would only choose one cookieless domain/subdomain to host your images such as static.mywebsite.com. And ideally static files should be hosted by a CDN, but that's another story.
+
+First of all, IE7 allowed only two concurrent connections per host. But most browsers today allow more than that. IE8 allows 6 concurrent connections, Chrome allows 6, and Firefox allows 8.
+
+So if your web page only has 6 images, for example, then it'd really be pointless to spread your images across multiple subdomains.
+
+So let's say you have 24 images on a page. Well, few things in life are free and there's such a thing as death by parallelization. If you host your images in 4 different subdomains, then that means that every single image could theoretically be downloaded in parallel. However, it also means that there are 3 additional DNS lookups involved. And a DNS lookup could be 100 ms, 150 ms, or sometimes longer. This added delay could easily offset any benefit of parallel downloads. You can see real-world examples of this by testing sites with http://www.webpagetest.org/
+
+Of course the best solution is to use CSS sprites when possible to cut down on the number of requests. I talk about that and the inherent overhead of every request in this article and this one.
+
+UPDATE
+
+There's an interesting article from Steve Souders on the subject of sharding domains...
+
+Most of the U.S. top ten web sites do domain sharding. YouTube uses i1.ytimg.com, i2.ytimg.com, i3.ytimg.com, and i4.ytimg.com. Live Search uses ts1.images.live.com, ts2.images.live.com, ts3.images.live.com, and ts4.images.live.com. Both of these sites are sharding across four domains. What’s the optimal number? Yahoo! released a study that recommends sharding across at least two, but no more than four, domains. Above four, performance actually degrades.
+
+http://www.stevesouders.com/blog/2009/05/12/sharding-dominant-domains/
+
+Note however that this was written in 2009. And in 2011 he posted a comment...
+
+Since newer browsers open more connections per domain, it’s probably better to revise the number downwards. I think 2 is a good compromize, but that’s just a hunch. It’d be great if some production property ran a test to determine the optimal number.
+
+You should also keep in mind that the big reason it's even necessary for the big sites like Yahoo and Amazon to do domain sharding is that their sites are so dynamic. The images are attached to products or stories which are displayed dynamically. So it's not feasible for them to use CSS sprites as aggressively as would be optimal.
+
+A site like StackOverflow, however, is light on these sorts of images and they have cut down on the number of requests so much that they don't need to do sharding. A big step towards making that happen is their usage of this sprites.png image...
+
+http://cdn.sstatic.net/Sites/stackoverflow/img/sprites.png?v=5
+
+UPDATE #2
+
+Steve Souders posted another update on domain sharding. He repeats much of what I've already mentioned. But the thing that stood out was SPDY and how that should affect your decision.
+
+Perhaps the strongest argument against domain sharding is that it’s unnecessary in the world of SPDY (as well as HTTP 2.0). In fact, domain sharding probably hurts performance under SPDY. SPDY supports concurrent requests (send all the request headers early) as well as request prioritization. Sharding across multiple domains diminishes these benefits. SPDY is supported by Chrome, Firefox, Opera, and IE 11. If your traffic is dominated by those browsers, you might want to skip domain sharding.
+
+UPDATE #3 (February 2018)
+
+As Dean mentioned in the comments below, CSS sprites aren't really buying you very much now with HTTP/2 being supported in modern browsers. But you do have to get an SSL certificate, set up your site to work with HTTPS, and ensure your web server is configured for HTTP/2. Either that, or use a CDN that already has all of that set up for you. Once you've done all of that then you can probably skip both CSS sprites and domain sharding.
+```
   * What are the exceptions?
 * Name 3 ways to decrease page load (perceived or actual load time).
 * If you jumped on a project and they used tabs and you used spaces, what would you do?
