@@ -5,6 +5,12 @@
 Let the parent handles events that occur on its child nodes. Why? It can boost performance.
 
 * Explain how `this` works in JavaScript
+
+Use the following 4 rules (in the order of precedence) to determine what `this` refers to:
+1. `new`
+2. `call`, `apply`, and `bind`
+3. `Object.method()`
+4. default to globel like (`document` in browser, `global` in node)
 * Explain how prototypal inheritance works
 * What do you think of AMD vs CommonJS?
 * Explain why the following doesn't work as an IIFE: `function foo(){ }();`.
