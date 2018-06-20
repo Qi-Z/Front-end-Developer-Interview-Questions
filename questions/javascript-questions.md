@@ -1,6 +1,8 @@
 # JS Questions:
 
 * Explain event delegation
+Let the parent handles events that occur on its child nodes.
+
 * Explain how `this` works in JavaScript
 * Explain how prototypal inheritance works
 * What do you think of AMD vs CommonJS?
