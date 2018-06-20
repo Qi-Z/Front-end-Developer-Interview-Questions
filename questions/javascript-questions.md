@@ -12,7 +12,126 @@ Use the following 4 rules (in the order of precedence) to determine what `this` 
 3. `Object.method()`
 4. default to globel like (`document` in browser, `global` in node)
 * Explain how prototypal inheritance works
+
+Javascript achieved inheritance through prototype chain. Even the keyword `class` is just a syntax sugar to `function`.
+```javascript
+class Animal {
+  constructor() {
+    this.weight = 1;
+  }
+}
+
+class Dog extends Animal {
+  constructor() {
+    super();
+    this.name = 'dog';
+  }
+  
+  bark() {
+    console.log(this.name);
+  }
+}
+
+// Equivalent to below using Babel
+"use strict";
+
+var _createClass = (function() {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function(Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+})();
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError(
+      "this hasn't been initialised - super() hasn't been called"
+    );
+  }
+  return call && (typeof call === "object" || typeof call === "function")
+    ? call
+    : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError(
+      "Super expression must either be null or a function, not " +
+        typeof superClass
+    );
+  }
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass)
+    Object.setPrototypeOf
+      ? Object.setPrototypeOf(subClass, superClass)
+      : (subClass.__proto__ = superClass);
+}
+
+//
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+var Animal = function Animal() {
+  _classCallCheck(this, Animal); // Ensure Animal is called as a constructor function
+
+  this.weight = 1;
+};
+
+var Dog = (function(_Animal) {
+  _inherits(Dog, _Animal);
+
+  function Dog() {
+    _classCallCheck(this, Dog);
+
+    var _this = _possibleConstructorReturn(
+      this,
+      (Dog.__proto__ || Object.getPrototypeOf(Dog)).call(this)
+    );
+
+    _this.name = "dog";
+    return _this;
+  }
+
+  _createClass(Dog, [
+    {
+      key: "bark",
+      value: function bark() {
+        console.log(this.name);
+      }
+    }
+  ]);
+
+  return Dog;
+})(Animal);
+
+```
+
+
 * What do you think of AMD vs CommonJS?
+
+They are all popular JavaScript Module Systems.\
+They are for solving dependencies.\
+
 * Explain why the following doesn't work as an IIFE: `function foo(){ }();`.
   * What needs to be changed to properly make it an IIFE?
 * What's the difference between a variable that is: `null`, `undefined` or undeclared?
