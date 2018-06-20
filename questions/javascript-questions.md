@@ -130,7 +130,7 @@ var Dog = (function(_Animal) {
 * What do you think of AMD vs CommonJS?
 
 They are all popular JavaScript Module Systems.\
-They are for solving dependencies.\
+They are for solving dependencies.
 
 * Explain why the following doesn't work as an IIFE: `function foo(){ }();`.
   * What needs to be changed to properly make it an IIFE?
