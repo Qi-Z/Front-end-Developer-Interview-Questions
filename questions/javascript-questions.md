@@ -1,7 +1,8 @@
 # JS Questions:
 
 * Explain event delegation
-Let the parent handles events that occur on its child nodes.
+
+Let the parent handles events that occur on its child nodes. Why? It can boost performance.
 
 * Explain how `this` works in JavaScript
 * Explain how prototypal inheritance works
