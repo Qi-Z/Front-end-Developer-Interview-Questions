@@ -130,7 +130,10 @@ var Dog = (function(_Animal) {
 * What do you think of AMD vs CommonJS?
 
 They are all popular JavaScript Module Systems.\
-They are for solving dependencies.
+They are for solving dependencies.\
+AMD supports asynchronous module loading as its name suggests. `requirejs` is an implementation of AMD.
+CommonJS is for synchronous loading. Often require transpiler
+https://auth0.com/blog/javascript-module-systems-showdown/
 
 * Explain why the following doesn't work as an IIFE: `function foo(){ }();`.
   * What needs to be changed to properly make it an IIFE?
