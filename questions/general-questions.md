@@ -172,6 +172,11 @@ UPDATE #3 (February 2018)
 
 As Dean mentioned in the comments below, CSS sprites aren't really buying you very much now with HTTP/2 being supported in modern browsers. But you do have to get an SSL certificate, set up your site to work with HTTPS, and ensure your web server is configured for HTTP/2. Either that, or use a CDN that already has all of that set up for you. Once you've done all of that then you can probably skip both CSS sprites and domain sharding.
 ```
+From Mozilla, domain sharding may not be good, better way is there with HTTP/2.
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Connection_management_in_HTTP_1.x
+```
+Unless you have a very specific immediate need, don't use this deprecated technique; switch to HTTP/2 instead. In HTTP/2, domain sharding is no longer useful: the HTTP/2 connection is able to handle parallel unprioritized requests very well. Domain sharding is even detrimental to performance. Most HTTP/2 implementations use a technique called connection coalescing to revert eventual domain sharding.
+```
   * What are the exceptions?
 * Name 3 ways to decrease page load (perceived or actual load time).
   * Prune CSS (Remove unused CSS)
